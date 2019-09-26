@@ -1,18 +1,66 @@
-.largeBody {
- padding: 2px;
- margin: 2px;
+.schedule {
+ float: right;
+ height: 40vh;
+ width: 20vw;
+ text-align: center;
+ margin-top: 0;
 }
 
-.smallBody {
- padding: 2px;
- margin: 2px;
+.scheduleTitle {
+ margin-left: 0;
+ margin-right: 0;
+ padding-left: 0;
+ padding-right: 0;
 }
 
-#schedule {
- padding: 10px;
+.myStudyWrapper {
+ margin-top: 0;
+ padding-top: 0;
 }
 
-#newClass {
- 
- padding: 4px;
+.newClass {
+ height: var(--element-height); 
+ background-color: var(--bColor);
+ border-left-width: .7vw;
+ border-left-style: solid;
+ border-left-color: var(--hColor);
+ margin-top: 2vh;
+ margin-bottom: 2vh;
+ padding-left: .7vw;
+ padding-right: .25vw;
+ text-align: left;
+ line-height: var(--space);
+ overflow-x: hidden;
 }
+
+.nameOfClass {
+ font-size: var(--font);
+ margin-top: .5vh;
+}
+
+.classDetails {
+ font-size: var(--font);
+ margin-top: .5vh;
+}
+
+.tasks {
+ float: left;
+ margin-right: 3vw;
+ text-align: left;
+ margin-top: 0;
+}
+
+.taskTitle {
+ text-align: center;
+}
+
+.taskName {
+ text-align: left;
+ padding-bottom: 5px;
+ font-size: 20px;
+}
+
+.circle {
+ float: left;
+}
+
