@@ -6,14 +6,15 @@ This is a module for [MagicMirror](https://github.com/MichMich/MagicMirror/tree/
 1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/ethanpartida/MMM-MyStudyLife.git`. A new folder will appear, navigate into it.
 2. Execute `npm install` to install the node dependencies. 
 3. Open a browser and navigate to the dashboard of your MyStudyLife account. Then open a developer console and input the command `localStorage._`. You should get a response along the lines of "XXXXXXXXXXXXXXXXXXXX:XXXXXXXXXXXXXXXXXXXXXXXXXXX=". Paste this code in your config file as follows: 
-`XXXXXXXXXXXXXXXXXXXX:XXXXXXXXXXXXXXXXXXXXXXXXXXX=",`.
+<br>`code: "XXXXXXXXXXXXXXXXXXXX:XXXXXXXXXXXXXXXXXXXXXXXXXXX="`. <br>
+(Unfortunately My Study Life changes this code roughly once a month and this code will have to be manually updated by the user)
 
-![Example of Dashboard and Console](https://github.com/ethanpartida/MMM-MyStudyLife/blob/master/Console.PNG)
+    ![Example of Dashboard and Console](https://github.com/ethanpartida/MMM-MyStudyLife/blob/master/Console.PNG)
 4. Unfortunately there is no way to find which days of the week each class takes place using the data MyStudyLife exports so you must enter this info into the config file. You will create a javascript object which has the name of your classes as keys and an array of the dates the class occurs on as values. The arrays will contain integers which represent the dates. They are as follows:
 
-  | Sunday | Monday | Tuesday | Wednesday | Thursday | Friday | Saturday |
-  |--------|--------|---------|-----------|----------|--------|----------|
-  | 0      | 1      | 2       | 3         | 4        | 5      | 6        |
+    | Sunday | Monday | Tuesday | Wednesday | Thursday | Friday | Saturday |
+    |--------|--------|---------|-----------|----------|--------|----------|
+    | 0      | 1      | 2       | 3         | 4        | 5      | 6        |
 
 ## Config
 The MMM-MyStudyLife entry in `config.js` can include the following:
@@ -66,6 +67,6 @@ modules: [
  ## Notes
  - This is my first project using Javascript, so feel free to submit any issues or critiques you have and I will do my best to update the project.
  - A special thanks to:
- 1. [Michael Teeuw](https://github.com/MichMich) for creating [MagicMirror2](https://github.com/MichMich/MagicMirror/tree/develop) which made this project possible
- 2. [Sam Lewis](https://github.com/SamLewis0602) whose [MMM-Traffic](https://github.com/SamLewis0602/MMM-Traffic) module which I used a guide for much of this projects creation
- 
+     1. [Michael Teeuw](https://github.com/MichMich) for creating [MagicMirror2](https://github.com/MichMich/MagicMirror/tree/develop)     which made this project possible.
+     2. [Sam Lewis](https://github.com/SamLewis0602) whose [MMM-Traffic](https://github.com/SamLewis0602/MMM-Traffic) module which I used a guide for much of this projects creation.
+     3. [University of Minnesota Anderson Labs](https://cse.umn.edu/andersonlabs) which allowed me create the physcial mirror which this software was written for. Both the Taylor Student Project Fund and Anderson Labs free to use equipment were vital in the creation of my project.
