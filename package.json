@@ -1,0 +1,26 @@
+{
+  "name": "Magic-Mirror-Module-Study",
+  "version": "1.0.0",
+  "description": "MyStudyLife module for the Magic Mirror.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethanpartida/MMM-MyStudyLife"
+  },
+  "keywords": [
+    "magic mirror",
+    "smart mirror",
+    "MyStudyLife",
+    "Study",
+    "module"
+  ],
+  "author": "Ethan Partida",
+  "contributors": "https://github.com/ethanpartida/MMM-MyStudyLife/graphs/contributors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ethanpartida/MMM-MyStudyLife/issues"
+  },
+  "homepage": "https://github.com/ethanpartida/MMM-MyStudyLife",
+  "dependencies": {
+    "request": "latest"
+    }
+}
