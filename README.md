@@ -1,13 +1,13 @@
 # MMM-MyStudyLife
 This is a module for [MagicMirror](https://github.com/MichMich/MagicMirror/tree/develop). It displays info from the website [MyStudyLife](https://www.mystudylife.com/). It syncs and displays your class schedule plus upcoming exams and tasks. Each indivual class, exam, and task is colorcoded to the colors used in [MyStudyLife](https://www.mystudylife.com/).
-IMAGE
+![Screenshot of Module](https://github.com/ethanpartida/MMM-MyStudyLife/blob/master/Screenshot.PNG)
 
 ## Installation
 1. Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/ethanpartida/MMM-MyStudyLife.git`. A new folder will appear, navigate into it.
 2. Execute `npm install` to install the node dependencies. 
 3. Open a browser and navigate to the dashboard of your MyStudyLife account. Then open a developer console and input the command `localStorage._`. You should get a response along the lines of "XXXXXXXXXXXXXXXXXXXX:XXXXXXXXXXXXXXXXXXXXXXXXXXX=". Paste this code in your config file as follows: 
 `code: "XMHOP7150NL5S5TD0VN7:OQAvDTPzfjpGH0BLCcG0NBSKiH0=",`.
-IMAGE
+![Example of Dashboard and Console](https://github.com/ethanpartida/MMM-MyStudyLife/blob/master/Console.PNG)
 4. Unfortunately there is no way to find which days of the week each class takes place using the data MyStudyLife exports so you must enter this info into the config file. You will create a javascript object which has the name of your classes as keys and an array of the dates the class occurs on as values. The arrays will contain integers which represent the dates. They are as follows:
 
   | Sunday | Monday | Tuesday | Wednesday | Thursday | Friday | Saturday |
