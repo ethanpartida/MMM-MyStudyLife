@@ -38,7 +38,7 @@ modules: [
   module: "MMM-Study",
   position: "top_right",
   config: {
-    code: "XMHOP7150NL5S5TD0VN7:OQAvDTPzfjpGH0BLCcG0NBSKiH0=",
+    code: "XXXXXXXXXXXXXXXXXXXX:XXXXXXXXXXXXXXXXXXXXXXXXXXX=",
     showSchedule: true,
     showExams: true,
     showTasks: true,
