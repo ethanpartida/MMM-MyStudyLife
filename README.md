@@ -35,7 +35,7 @@ Here is an example of what `config.js` might look like:
 ```javascript
 modules: [
   {
-  module: "MMM-Study",
+  module: "MMM-MyStudyLife",
   position: "top_right",
   config: {
     code: "XXXXXXXXXXXXXXXXXXXX:XXXXXXXXXXXXXXXXXXXXXXXXXXX=",
