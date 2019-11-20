@@ -19,6 +19,7 @@ Module.register("MMM-MyStudyLife", {
 		totNumOfTasks: 5,
 		totNumOfExams: 7,
     includeExamSub: true,
+    12hour: true,
 		classes: {},
 		colorCode: {
 			'0': {'h': "#049372", 'b': "#113b31"},
@@ -211,13 +212,23 @@ Module.register("MMM-MyStudyLife", {
 			var classDetails = document.createElement('p');
 			classDetails.className = "classDetails";
 			classDetails.style.setProperty("--font", i.length/totLength*40+8+'px');
-			classDetails.innerHTML = i.times[0].start_time.substr(0,5) + '-' + i.times[0].end_time.substr(0,5) + '<br />' +i.building + ' ' + i.room;
+			classDetails.innerHTML = timeconvert(i.times[0].start_time.substr(0,5)) + '-' + timeconvert(i.times[0].end_time.substr(0,5)) + '<br />' +i.building + ' ' + i.room;
 			newClass.appendChild(nameOfClass);
 			newClass.appendChild(classDetails);
 			schedule.appendChild(newClass);
 		}
 		return schedule;
 	},
+  timeconvert: function(time) {
+    if (this.config.12hour) {
+      var hour = parseint(time.substr(0,2))
+      if (hour > 12) {
+        hour -= 12
+        return "0" + hour.toString() + time.substr(2,3)
+      }
+    }
+    return time;
+  },
   socketNotificationReceived: function(notification, payload) {
 		if(notification == "success"){
 			this.datas = payload;
