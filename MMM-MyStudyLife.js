@@ -1,6 +1,9 @@
 /*WIP Magic Mirror Module
  * TO DO:
+ * Add upcoming Exams
+ * Pretty up code, get everything to follow StyleGuide since I didnt know language starting this project
  * MyStudyLife changes the security key
+ * Get Subject in front of Exams and style exams so like tasks
  */
 
 Module.register("MMM-MyStudyLife", {
@@ -15,8 +18,8 @@ Module.register("MMM-MyStudyLife", {
 		showTasks: true,
 		totNumOfTasks: 5,
 		totNumOfExams: 7,
-    includeExamSub: true,
-    militaryTime: false,
+		includeExamSub: true,
+		militaryTime: false,
 		classes: {},
 		colorCode: {
 			'0': {'h': "#049372", 'b': "#113b31"},
@@ -158,6 +161,16 @@ Module.register("MMM-MyStudyLife", {
 		}
 		return tasks;
 	},
+  timeConvert: function(time) {
+    if (!this.config.militaryTime) {
+      var hour = parseInt(time.substr(0,2));
+      if (hour > 12) {
+        hour -= 12
+        return "0" + hour.toString() + time.substr(2,3)
+      }
+    }
+    return time;
+   },
   makeSchedule: function() {
 		var schedule = document.createElement('div');
 		schedule.className = "schedule";
@@ -209,23 +222,15 @@ Module.register("MMM-MyStudyLife", {
 			var classDetails = document.createElement('p');
 			classDetails.className = "classDetails";
 			classDetails.style.setProperty("--font", i.length/totLength*40+8+'px');
-			classDetails.innerHTML = timeconvert(i.times[0].start_time.substr(0,5)) + '-' + timeconvert(i.times[0].end_time.substr(0,5)) + '<br />' +i.building + ' ' + i.room;
+			var startTime =  this.timeConvert(i.times[0].start_time.substr(0,5));
+			var endTime = this.timeConvert(i.times[0].end_time.substr(0,5));
+			classDetails.innerHTML = startTime + '-' + endTime + '<br />' +i.building + ' ' + i.room;
 			newClass.appendChild(nameOfClass);
 			newClass.appendChild(classDetails);
 			schedule.appendChild(newClass);
 		}
 		return schedule;
 	},
-  timeconvert: function(time) {
-    if (!this.config.militaryTime) {
-      var hour = parseint(time.substr(0,2))
-      if (hour > 12) {
-        hour -= 12
-        return "0" + hour.toString() + time.substr(2,3)
-      }
-    }
-    return time;
-  },
   socketNotificationReceived: function(notification, payload) {
 		if(notification == "success"){
 			this.datas = payload;
