@@ -1,9 +1,6 @@
 /*WIP Magic Mirror Module
  * TO DO:
- * Add upcoming Exams
- * Pretty up code, get everything to follow StyleGuide since I didnt know language starting this project
  * MyStudyLife changes the security key
- * Get Subject in front of Exams and style exams so like tasks
  */
 
 Module.register("MMM-MyStudyLife", {
@@ -19,7 +16,7 @@ Module.register("MMM-MyStudyLife", {
 		totNumOfTasks: 5,
 		totNumOfExams: 7,
     includeExamSub: true,
-    12hour: true,
+    militaryTime: false,
 		classes: {},
 		colorCode: {
 			'0': {'h': "#049372", 'b': "#113b31"},
@@ -220,7 +217,7 @@ Module.register("MMM-MyStudyLife", {
 		return schedule;
 	},
   timeconvert: function(time) {
-    if (this.config.12hour) {
+    if (!this.config.militaryTime) {
       var hour = parseint(time.substr(0,2))
       if (hour > 12) {
         hour -= 12
