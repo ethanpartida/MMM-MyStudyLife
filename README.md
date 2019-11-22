@@ -30,7 +30,9 @@ The MMM-MyStudyLife entry in `config.js` can include the following:
 | `totNumOfTasks`  | The maximum amount of tasks displayed under the "Tasks" tab <br>**Type** `Integer` <br>**Default** `5`                                                    |
 | `totNumOfExams`  | The maximum amount of exams displayed under the "Exams" tab <br>**Type** `Integer` <br>**Default** `7`                                                    |
 | `includeExamSub` | Whether or not to include the subject of the exam before the title of the exam ("Physics Final" vs "Final") <br>**Type** `Boolean` <br>**Default** `true` |
-| `classes`        | A javascript object containing all of your classes and what days of the week they take place on <br>**Type** `Object` <br>**Required**                    |
+| `classes`        | A javascript object containing all of your classes and what days of the week they take place on <br>**Type** `Object` <br>**Required**
+| `militaryTime`   |  Whether or not to use 24 hour time in class schedule <br>**Type** `Boolean` <br>**Default** `true`  |
+
 Here is an example of what `config.js` might look like:
 ```javascript
 modules: [
