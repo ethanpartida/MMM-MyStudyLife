@@ -18,7 +18,8 @@ Module.register("MMM-MyStudyLife", {
 		showTasks: true,
 		totNumOfTasks: 5,
 		totNumOfExams: 7,
-    includeExamSub: true,
+		includeExamSub: true,
+		militaryTime: false,
 		classes: {},
 		colorCode: {
 			'0': {'h': "#049372", 'b': "#113b31"},
@@ -160,6 +161,16 @@ Module.register("MMM-MyStudyLife", {
 		}
 		return tasks;
 	},
+  timeConvert: function(time) {
+    if (!this.config.militaryTime) {
+      var hour = parseInt(time.substr(0,2));
+      if (hour > 12) {
+        hour -= 12
+        return "0" + hour.toString() + time.substr(2,3)
+      }
+    }
+    return time;
+   },
   makeSchedule: function() {
 		var schedule = document.createElement('div');
 		schedule.className = "schedule";
@@ -188,14 +199,15 @@ Module.register("MMM-MyStudyLife", {
 			schedule.appendChild(sHeader);
 		}
 		var totLength = 0;
+		var i = classesToday[0];
 		for (i of classesToday) {
 			totLength += i.length;
 		}
 		for (i of classesToday) {
 			var newClass = document.createElement('div');
 			newClass.className = "newClass";
-			newClass.style.setProperty("--element-height", i.length/totLength*40+'vh');
-			newClass.style.setProperty("--space", i.length/totLength*350+'%');
+			newClass.style.setProperty("--element-height", Math.min(0.5,i.length/totLength)*40+'vh');
+			newClass.style.setProperty("--space", Math.min(0.5,i.length/totLength)*350+'%');
 			if (this.config.color) {
 			newClass.style.setProperty("--hColor", this.config.colorCode[i.color].h);
 			newClass.style.setProperty("--bColor", this.config.colorCode[i.color].b);
@@ -207,11 +219,13 @@ Module.register("MMM-MyStudyLife", {
 			var nameOfClass = document.createElement('h');
 			nameOfClass.className = "nameOfClass";
 			nameOfClass.innerHTML = i.module;
-			nameOfClass.style.setProperty("--font", i.length/totLength*57+8+'px');
+			nameOfClass.style.setProperty("--font", Math.min(.5,i.length/totLength)*57+8+'px');
 			var classDetails = document.createElement('p');
 			classDetails.className = "classDetails";
-			classDetails.style.setProperty("--font", i.length/totLength*40+8+'px');
-			classDetails.innerHTML = i.times[0].start_time.substr(0,5) + '-' + i.times[0].end_time.substr(0,5) + '<br />' +i.building + ' ' + i.room;
+			classDetails.style.setProperty("--font", Math.min(0.5,i.length/totLength)*40+8+'px');
+			var startTime =  this.timeConvert(i.times[0].start_time.substr(0,5));
+			var endTime = this.timeConvert(i.times[0].end_time.substr(0,5));
+			classDetails.innerHTML = startTime + '-' + endTime + '<br />' +i.building + ' ' + i.room;
 			newClass.appendChild(nameOfClass);
 			newClass.appendChild(classDetails);
 			schedule.appendChild(newClass);
