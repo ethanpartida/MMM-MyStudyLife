@@ -71,4 +71,4 @@ modules: [
  - A special thanks to:
      1. [Michael Teeuw](https://github.com/MichMich) for creating [MagicMirror2](https://github.com/MichMich/MagicMirror/tree/develop)     which made this project possible.
      2. [Sam Lewis](https://github.com/SamLewis0602) whose [MMM-Traffic](https://github.com/SamLewis0602/MMM-Traffic) module which I used a guide for much of this projects creation.
-     3. [University of Minnesota Anderson Labs](https://cse.umn.edu/andersonlabs) which allowed me create the physcial mirror which this software was written for. Both the Taylor Student Project Fund and Anderson Labs free to use equipment were vital in the creation of my project.
+     3. [University of Minnesota Anderson Labs](https://cse.umn.edu/andersonlabs) which allowed me create the physcial mirror which this software was written for. The Taylor Student Project Fund and Anderson Labs were vital in the creation of this project.
