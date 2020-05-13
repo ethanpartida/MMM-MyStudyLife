@@ -22,5 +22,5 @@
   "homepage": "https://github.com/ethanpartida/MMM-MyStudyLife",
   "dependencies": {
     "request": "latest"
-    }
+  }
 }

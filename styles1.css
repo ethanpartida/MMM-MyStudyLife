@@ -53,6 +53,7 @@
 
 .tasks {
  text-align: left;
+ font-size: var(--font);   
 }
 
 .taskTitle {
@@ -62,7 +63,6 @@
 .taskName {
  text-align: left;
  padding-bottom: 5px;
- font-size: 20px;
 }
 
 .circle {
@@ -77,7 +77,7 @@
 }
 
 .newExam {
- font-size: 20px;
+ font-size: var(--font);
  padding-left: 8px;
  padding-top: 0;
  margin: 0;
