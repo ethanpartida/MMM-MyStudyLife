@@ -16,16 +16,21 @@ Module.register("MMM-MyStudyLife", {
 	showSchedule: true,
 	showExams: false,
 	showTasks: false,
-	totNumOfTasks: 5,
-	totNumOfExams: 7,
-	includeExamSub: true,
-	militaryTime: false,
+	totNumOfTasks: 5, //max number of tasks displayed
+	totNumOfExams: 7, //max number of exams displayed
+	includeExamSub: true, //Include subject of exam in name
+	militaryTime: false, //24 hour time
 	averageScheduleHeight: 600, //pixels
 	minClassHeight: 15, //% of schedule pixels
 	maxClassHeight: 50, //% of schedule pixels
 	classFontScale: 1,
 	taskFontScale: 1,
 	examFontScale: 1,
+	useCycles: false, //cycle based schedule
+	//Ignore these if not using cycle schedule
+	offset: 0, //offset to adjust cycle position
+	daysOff: [0,6], //days in which there is no school, they dont count towards cycle rotation
+	cycleLength: 2, //Length of cycle
 	classes: {},
 	colorCode: {
 	    '0': {'h': "#049372", 'b': "#113b31"},
@@ -51,6 +56,8 @@ Module.register("MMM-MyStudyLife", {
 	this.datas = ' ';
 	this.currentTerm;
 	this.date;
+	this.cycleDay=this.config.offset;
+	this.storedDate=new Date();
 	this.updateData(this);
     },
     getStyles: function() {
@@ -188,14 +195,28 @@ Module.register("MMM-MyStudyLife", {
 	}
 	return time;
     },
+    getCycleDay: function() {
+	if(this.config.useCycles){
+	    if (this.date.toDateString != this.storedDate.toDateString) { //kludge to check if this is a new day
+		if (!(this.date.getDay() in this.config.daysOff)) {
+		    this.cycleDay=(this.cycleDay+1)%this.config.cycleLength;
+		}
+		this.storedDate=this.date;
+	    }
+	    return this.cycleDay;
+	}
+	else {
+	    return this.date.getDay();
+	}
+    },
     makeSchedule: function() {
 	var schedule = document.createElement('div');
 	schedule.className = "schedule";
-	var dayOfTheWeek = this.date.getDay();
-	var classesToday = this.sortClasses(dayOfTheWeek, this.datas.classes);
-	if (classesToday.length == 0 || this.date.getHours()*60+this.date.getMinutes() > this.convertTime(classesToday[classesToday.length-1].times[0].end_time)) {
-	    classesToday = this.sortClasses(dayOfTheWeek+1, this.datas.classes);
-	    if (classesToday.length != 0) {
+	//	var dayOfTheWeek = this.date.getDay();
+	var classesToday = this.sortClasses(this.getCycleDay(), this.datas.classes);
+	if (this.date.getDay() in this.config.daysOff||classesToday.length == 0 || this.date.getHours()*60+this.date.getMinutes() > this.convertTime(classesToday[classesToday.length-1].times[0].end_time)) {
+	    classesToday = this.sortClasses(this.getCycleDay()+1, this.datas.classes);
+	    if (classesToday.length != 0 && !((this.date.getDay()+1)%6 in this.config.daysOff)) {
 		var sHeader = document.createElement('h2');
 		sHeader.className = "scheduleTitle";
 		sHeader.innerHTML = "Tomorrow's Classes";
@@ -220,6 +241,7 @@ Module.register("MMM-MyStudyLife", {
 	    totLength += i.length;
 	}
 	for (i of classesToday) {
+//	    console.log("!!! " + i.module);
 	    var newClass = document.createElement('div');
 	    newClass.className = "newClass";
 	    newClass.style.setProperty("--element-height", Math.min(this.config.maxClassSize,
@@ -266,7 +288,8 @@ Module.register("MMM-MyStudyLife", {
 			endDate = new Date(term.end_date);
 			if (this.date > startDate && this.date < endDate) {
 			    this.currentTerm = term.guid;
-			    console.log(this.currentTerm);
+//			    this.startDate = startDate;
+//			    console.log(this.currentTerm);
 			}
 		    }
 		}
@@ -304,11 +327,12 @@ Module.register("MMM-MyStudyLife", {
 	    }
 	    return (Number(time.substring(0,2))*60 + Number(time.substring(3,5)));
 	},
-	sortClasses: function(dayOfTheWeek, classes) {
+	sortClasses: function(cycleDay, classes) {
 	    var classesToday = [];
 	    for (i of classes) {
-		console.log(i.module);
-		if (i.days.includes(dayOfTheWeek)) {
+	//	console.log(i.module);
+		if (i.days.includes(cycleDay)) {
+		    console.log(i.module);
 		    classesToday.push(i);
 		}
 	    }
