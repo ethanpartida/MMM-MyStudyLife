@@ -24,7 +24,7 @@ Module.register("MMM-MyStudyLife", {
 	classFontScale: 1,
 	taskFontScale: 1,
 	examFontScale: 1,
-	useTerms: true, // use terms or not, if not it will default to yearly schedules
+	useTerms: false, // use terms or not, if not it will default to yearly schedules
 	useCycles: false, //cycle based schedule
 	//Ignore these if not using cycle schedule
 	offset: 0, //offset to adjust cycle position
@@ -314,6 +314,8 @@ console.log("Loading successful");
 			i.color = subToColor[i.subject_guid];
 		    }
 		    else if (i.year_guid == this.currentYear){
+			console.log("class occuring:");
+			console.log(i.module);
 			i.days = this.config.classes[i.module];
 			i.length= this.convertTime(i.times[0].end_time) - this.convertTime(i.times[0].start_time);
 			i.color = subToColor[i.subject_guid];
