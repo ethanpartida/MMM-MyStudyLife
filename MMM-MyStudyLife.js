@@ -77,6 +77,7 @@ Module.register("MMM-MyStudyLife", {
 	    return wrapper;
 	}
 	else {
+console.log("Loading successful");
 	    if(this.config.showSchedule) {
 		wrapper.appendChild(this.makeSchedule());
 	    }
@@ -275,6 +276,7 @@ Module.register("MMM-MyStudyLife", {
 	},
 	socketNotificationReceived: function(notification, payload) {
 	    if(notification == "success"){
+                console.log("code worked");
 		this.datas = payload;
 		//Adding Properties to Classes, Tasks, and Exams
 		var subToColor = {};
@@ -283,6 +285,7 @@ Module.register("MMM-MyStudyLife", {
 		    subToColor[i.guid] = i.color.toString();
 		    subjectName[i.guid] = i.name;
 		}
+console.log("added schedule stuff");
 		for (year of this.datas.academic_years) {
 		    if (this.config.useTerms) {
 			for (term of year.terms) {
@@ -301,8 +304,15 @@ Module.register("MMM-MyStudyLife", {
 			}    
 		    }
 		}
+
+console.log("added term stuff");
 		if (!this.currentTerm) {
+<<<<<<< HEAD
 		    throw "Could not find current term/year";
+=======
+console.log("term stuff failed");
+		    throw "Could not find current term";
+>>>>>>> c7a621b206386c86285017b729acee4a8ccd4f51
 		}
 		for (i  of this.datas.classes) {
 		    if (this.config.useTerms) {
@@ -326,14 +336,16 @@ Module.register("MMM-MyStudyLife", {
 			}
 		    }
 		}
+console.log("added class stuff");
 		for (i of this.datas.tasks) {
 		    i.color = subToColor[i.subject_guid];
 		}
+console.log("added tasks stuff");
 		for (i of this.datas.exams) {
 		    i.color = subToColor[i.subject_guid];
 		    i.subjectN = subjectName[i.subject_guid];
 		}
-
+console.log("added exam stuff");
 		this.loaded = true;
 		this.updateDom(1000);
 	    }
