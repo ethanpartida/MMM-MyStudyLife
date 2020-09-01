@@ -1,9 +1,7 @@
 /*WIP Magic Mirror Module
  * TO DO:
- * Add upcoming Exams
  * Pretty up code, get everything to follow StyleGuide since I didnt know language starting this project
  * MyStudyLife changes the security key
- * Get Subject in front of Exams and style exams so like tasks
  */
 
 Module.register("MMM-MyStudyLife", {
@@ -56,6 +54,7 @@ Module.register("MMM-MyStudyLife", {
 	this.loaded = false;
 	this.datas = ' ';
 	this.currentTerm;
+	this.currentYear;
 	this.date;
 	this.cycleDay=this.config.offset;
 	this.storedDate=new Date();
@@ -285,7 +284,7 @@ console.log("Loading successful");
 		    subToColor[i.guid] = i.color.toString();
 		    subjectName[i.guid] = i.name;
 		}
-console.log("added schedule stuff");
+		console.log("added schedule stuff");
 		for (year of this.datas.academic_years) {
 		    if (this.config.useTerms) {
 			for (term of year.terms) {
@@ -304,48 +303,37 @@ console.log("added schedule stuff");
 			}    
 		    }
 		}
-
-console.log("added term stuff");
-		if (!this.currentTerm) {
-<<<<<<< HEAD
+		console.log("added term stuff");
+		if (!this.currentTerm && !this.currentYear) {
 		    throw "Could not find current term/year";
-=======
-console.log("term stuff failed");
-		    throw "Could not find current term";
->>>>>>> c7a621b206386c86285017b729acee4a8ccd4f51
 		}
 		for (i  of this.datas.classes) {
-		    if (this.config.useTerms) {
-			if (i.term_guid == this.currentTerm) {
-			    i.days = this.config.classes[i.module];
-			    i.length= this.convertTime(i.times[0].end_time) - this.convertTime(i.times[0].start_time);
-			    i.color = subToColor[i.subject_guid];
-			}
-			else {
-			    i.days = [-1]; //class is not occuring this term
-			}
+		    if (i.term_guid == this.currentTerm) {
+			i.days = this.config.classes[i.module];
+			i.length= this.convertTime(i.times[0].end_time) - this.convertTime(i.times[0].start_time);
+			i.color = subToColor[i.subject_guid];
+		    }
+		    else if (i.year_guid == this.currentYear){
+			i.days = this.config.classes[i.module];
+			i.length= this.convertTime(i.times[0].end_time) - this.convertTime(i.times[0].start_time);
+			i.color = subToColor[i.subject_guid];
 		    }
 		    else {
-			if (i.year_guid == this.currentYear) {
-			    i.days = this.config.classes[i.module];
-			    i.length= this.convertTime(i.times[0].end_time) - this.convertTime(i.times[0].start_time);
-			    i.color = subToColor[i.subject_guid];
-			}
-			else {
-			    i.days = [-1]; //class is not occuring this term
-			}
+			console.log("class not occuring:");
+			console.log(i.module);
+			i.days = [-1]; //class is not occuring this term
 		    }
 		}
-console.log("added class stuff");
+		console.log("added class stuff");
 		for (i of this.datas.tasks) {
 		    i.color = subToColor[i.subject_guid];
 		}
-console.log("added tasks stuff");
+		console.log("added tasks stuff");
 		for (i of this.datas.exams) {
 		    i.color = subToColor[i.subject_guid];
 		    i.subjectN = subjectName[i.subject_guid];
 		}
-console.log("added exam stuff");
+		console.log("added exam stuff");
 		this.loaded = true;
 		this.updateDom(1000);
 	    }
@@ -361,8 +349,9 @@ console.log("added exam stuff");
 	},
 	sortClasses: function(cycleDay, classes) {
 	    var classesToday = [];
+	    console.log("sorting classes")
 	    for (i of classes) {
-	//	console.log(i.module);
+		console.log(i.module);
 		if (i.days.includes(cycleDay)) {
 		    classesToday.push(i);
 		}
