@@ -26,6 +26,7 @@ Module.register("MMM-MyStudyLife", {
 	classFontScale: 1,
 	taskFontScale: 1,
 	examFontScale: 1,
+	useTerms: true, // use terms or not, if not it will default to yearly schedules
 	useCycles: false, //cycle based schedule
 	//Ignore these if not using cycle schedule
 	offset: 0, //offset to adjust cycle position
@@ -283,18 +284,25 @@ Module.register("MMM-MyStudyLife", {
 		    subjectName[i.guid] = i.name;
 		}
 		for (year of this.datas.academic_years) {
-		    for (term of year.terms) {
-			startDate = new Date(term.start_date);
-			endDate = new Date(term.end_date);
-			if (this.date > startDate && this.date < endDate) {
-			    this.currentTerm = term.guid;
-//			    this.startDate = startDate;
-//			    console.log(this.currentTerm);
+		    if (this.config.useTerms) {
+			for (term of year.terms) {
+			    startDate = new Date(term.start_date);
+			    endDate = new Date(term.end_date);
+			    if (this.date > startDate && this.date < endDate) {
+				this.currentTerm = term.guid;
+			    }
 			}
 		    }
+		    else {
+			startDate = new Date(year.start_date);
+			endDate = new Date(year.end_date);
+			if (this.date > startDate && this.date < endDate) {
+			    this.currentYear = year.guid;
+			}    
+		    }
 		}
-		if (!this.currentTerm) {
-		    throw "Could not find current term";
+		if (!this.currentTerm && !this.currentYear) {
+		    throw "Could not find current term/year";
 		}
 		for (i  of this.datas.classes) {
 		    if (i.term_guid == this.currentTerm) {
