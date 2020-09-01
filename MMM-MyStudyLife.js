@@ -301,17 +301,29 @@ Module.register("MMM-MyStudyLife", {
 			}    
 		    }
 		}
-		if (!this.currentTerm && !this.currentYear) {
+		if (!this.currentTerm) {
 		    throw "Could not find current term/year";
 		}
 		for (i  of this.datas.classes) {
-		    if (i.term_guid == this.currentTerm) {
-			i.days = this.config.classes[i.module];
-			i.length= this.convertTime(i.times[0].end_time) - this.convertTime(i.times[0].start_time);
-			i.color = subToColor[i.subject_guid];
+		    if (this.config.useTerms) {
+			if (i.term_guid == this.currentTerm) {
+			    i.days = this.config.classes[i.module];
+			    i.length= this.convertTime(i.times[0].end_time) - this.convertTime(i.times[0].start_time);
+			    i.color = subToColor[i.subject_guid];
+			}
+			else {
+			    i.days = [-1]; //class is not occuring this term
+			}
 		    }
 		    else {
-			i.days = [-1]; //class is not occuring this term
+			if (i.year_guid == this.currentYear) {
+			    i.days = this.config.classes[i.module];
+			    i.length= this.convertTime(i.times[0].end_time) - this.convertTime(i.times[0].start_time);
+			    i.color = subToColor[i.subject_guid];
+			}
+			else {
+			    i.days = [-1]; //class is not occuring this term
+			}
 		    }
 		}
 		for (i of this.datas.tasks) {
@@ -340,7 +352,6 @@ Module.register("MMM-MyStudyLife", {
 	    for (i of classes) {
 	//	console.log(i.module);
 		if (i.days.includes(cycleDay)) {
-		    console.log(i.module);
 		    classesToday.push(i);
 		}
 	    }
