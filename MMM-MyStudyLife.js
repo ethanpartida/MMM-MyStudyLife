@@ -309,17 +309,19 @@ console.log("Loading successful");
 		}
 		for (i  of this.datas.classes) {
 		    if (i.term_guid == this.currentTerm) {
-			i.days = this.config.classes[i.module];
-			i.length= this.convertTime(i.times[0].end_time) - this.convertTime(i.times[0].start_time);
-			i.color = subToColor[i.subject_guid];
-		    }
-		    else if (i.year_guid == this.currentYear){
 			console.log("class occuring:");
 			console.log(i.module);
 			i.days = this.config.classes[i.module];
 			i.length= this.convertTime(i.times[0].end_time) - this.convertTime(i.times[0].start_time);
 			i.color = subToColor[i.subject_guid];
 		    }
+/*		    else if (i.year_guid == this.currentYear){
+			console.log("class occuring:");
+			console.log(i.module);
+			i.days = this.config.classes[i.module];
+			i.length= this.convertTime(i.times[0].end_time) - this.convertTime(i.times[0].start_time);
+			i.color = subToColor[i.subject_guid];
+		    }*/
 		    else {
 			console.log("class not occuring:");
 			console.log(i.module);
