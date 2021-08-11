@@ -1,5 +1,5 @@
 # MMM-MyStudyLife
-This is a module for [MagicMirror](https://github.com/MichMich/MagicMirror/tree/develop). It displays info from the website [MyStudyLife](https://www.mystudylife.com/). It syncs and displays your class schedule plus upcoming exams and tasks. Each indivual class, exam, and task is colorcoded to the colors used in [MyStudyLife](https://www.mystudylife.com/).
+This is a module for [MagicMirror](https://github.com/MichMich/MagicMirror/tree/develop). It displays info from the website [MyStudyLife](https://www.mystudylife.com/). It syncs and displays your class schedule plus upcoming exams and tasks. Each individual class, exam, and task is colorcoded to the colors used in [MyStudyLife](https://www.mystudylife.com/).
 ![Screenshot of Module](https://github.com/ethanpartida/MMM-MyStudyLife/blob/master/Screenshot.PNG)
 
 ## Installation
