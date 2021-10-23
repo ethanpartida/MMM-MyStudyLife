@@ -356,6 +356,10 @@ console.log("Loading successful");
 	    console.log("sorting classes")
 	    for (i of classes) {
 		console.log(i.module);
+		if (i.days == null) {
+		    console.log("There was an error adding the config schedule to this class. Please check that your config is spelt exactly as it is in MyStudyLife")
+		    continue
+		}
 		if (i.days.includes(cycleDay)) {
 		    classesToday.push(i);
 		}
