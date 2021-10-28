@@ -354,6 +354,7 @@ console.log("Loading successful");
 	sortClasses: function(cycleDay, classes) {
 	    var classesToday = [];
 	    console.log("sorting classes")
+	    console.log(classes)
 	    for (i of classes) {
 		console.log(i.module);
 		if (i.days == null) {
